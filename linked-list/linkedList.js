@@ -37,6 +37,7 @@ function LinkedList(headNode = null) {
 
   function tail() {
     let tmpNode = this.headNode;
+    // get to last node
     while (tmpNode.nextNode !== null) {
       tmpNode = tmpNode.nextNode;
     }
@@ -45,16 +46,29 @@ function LinkedList(headNode = null) {
 
   function at(index) {
     let indexNode = this.headNode;
-
+    // get to node at index
     for (let i = 0; i < index; i += 1) {
       if (indexNode === null) return null;
       indexNode = indexNode.nextNode;
     }
-
     return indexNode;
   }
 
-  return { append, prepend, size, head, tail, at };
+  function pop() {
+    // if pop at listSize = 0
+    if (this.headNode === null) return null;
+    // if pop at listSize = 1
+    if (this.headNode.nextNode === null) return (this.headNode = null);
+
+    let preLastNode = this.headNode;
+    // get to element which is 1 before the tail, to then remove the .next to it
+    while (preLastNode.nextNode.nextNode !== null) {
+      preLastNode = preLastNode.nextNode;
+    }
+    preLastNode.nextNode = null;
+  }
+
+  return { append, prepend, size, head, tail, at, pop };
 }
 
 function Node(value = null, nextNode = null) {
@@ -73,7 +87,18 @@ list.append(54);
 console.log(list.size()); // 5
 console.log(list.head()); // node with value 1  + nextNode with all other Nodes
 console.log(list.tail()); // node with value 52 + nextNode = null
+
 console.log(list.at(0)); // value:  1
 console.log(list.at(2)); // value:  5
 console.log(list.at(4)); // value: 54
 console.log(list.at(9)); // value: null
+
+list.pop(); // works
+list.pop(); // works
+console.log(list.size()); // value: 3
+console.log(list.head()); // head:1 -> node:2 -> tail:5 -> null
+// list.pop();
+// list.pop();
+// list.pop();
+// list.pop();
+// console.log(list.head()); -> pop() works with all listSizes!
