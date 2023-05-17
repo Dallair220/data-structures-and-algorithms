@@ -1,6 +1,11 @@
+// https://www.theodinproject.com/lessons/javascript-linked-lists
+
+// LinkedList factory, which represents the full list.
 function LinkedList(headNode = null) {
+  // append(value) adds a new node containing value to the end of the list
   function append(value) {
-    if (this.headNode === null) {
+    // WHY is headNode undefined and not NULL?
+    if (this.headNode === undefined) {
       this.headNode = Node(value);
       return;
     }
@@ -9,18 +14,16 @@ function LinkedList(headNode = null) {
     while (tmpNode.nextNode !== null) {
       tmpNode = tmpNode.nextNode;
     }
-    tmpNode.nextNode = Node(value);
+    return (tmpNode.nextNode = Node(value));
   }
 
+  // prepend(value) adds a new node containing value to the start of the list
   function prepend(value) {
-    if (this.headNode === null) {
-      this.headNode = Node(value);
-      return;
-    }
     // new node is headNode and it's next node is the old headNode
-    this.headNode = Node(value, this.headNode);
+    return (this.headNode = Node(value, this.headNode));
   }
 
+  // size returns the total number of nodes in the list
   function size() {
     let listSize = 0;
     let tmpNode = this.headNode;
@@ -31,10 +34,12 @@ function LinkedList(headNode = null) {
     return listSize;
   }
 
+  // head returns the first node in the list
   function head() {
     return this.headNode;
   }
 
+  // tail returns the last node in the list
   function tail() {
     let tmpNode = this.headNode;
     // get to last node
@@ -44,6 +49,7 @@ function LinkedList(headNode = null) {
     return tmpNode;
   }
 
+  // at(index) returns the node at the given index
   function at(index) {
     let indexNode = this.headNode;
     // get to node at index
@@ -54,6 +60,7 @@ function LinkedList(headNode = null) {
     return indexNode;
   }
 
+  // pop removes the last element from the list
   function pop() {
     // if pop at listSize = 0
     if (this.headNode === null) return null;
@@ -65,12 +72,26 @@ function LinkedList(headNode = null) {
     while (preLastNode.nextNode.nextNode !== null) {
       preLastNode = preLastNode.nextNode;
     }
-    preLastNode.nextNode = null;
+    return (preLastNode.nextNode = null);
   }
 
-  return { append, prepend, size, head, tail, at, pop };
+  // contains(value) returns true if the passed in value is in the list and otherwise returns false.
+  function contains(valueToFind) {
+    // Same here. Why is headNode undefined and not null?
+    if (this.headNode === undefined) return false;
+
+    let tmpNode = this.headNode;
+    while (tmpNode !== null) {
+      if (tmpNode.value === valueToFind) return true;
+      tmpNode = tmpNode.nextNode;
+    }
+    return false;
+  }
+
+  return { append, prepend, size, head, tail, at, pop, contains };
 }
 
+// Node factory, containing a value property and a link to the nextNode.
 function Node(value = null, nextNode = null) {
   return { value, nextNode };
 }
@@ -102,3 +123,8 @@ console.log(list.head()); // head:1 -> node:2 -> tail:5 -> null
 // list.pop();
 // list.pop();
 // console.log(list.head()); -> pop() works with all listSizes!
+
+console.log(list.contains(5)); // true
+
+const list2 = LinkedList();
+console.log(list2.contains(1));
