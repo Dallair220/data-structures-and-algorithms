@@ -43,7 +43,18 @@ function LinkedList(headNode = null) {
     return tmpNode;
   }
 
-  return { append, prepend, size, head, tail };
+  function at(index) {
+    let indexNode = this.headNode;
+
+    for (let i = 0; i < index; i += 1) {
+      if (indexNode === null) return null;
+      indexNode = indexNode.nextNode;
+    }
+
+    return indexNode;
+  }
+
+  return { append, prepend, size, head, tail, at };
 }
 
 function Node(value = null, nextNode = null) {
@@ -57,7 +68,12 @@ list.append(3);
 list.prepend(2);
 list.prepend(1);
 list.append(54);
+// head:1 -> node:2 -> node:5 -> node:3 -> tail:54 -> null
 
-console.log(list.size());
-console.log(list.head());
-console.log(list.tail());
+console.log(list.size()); // 5
+console.log(list.head()); // node with value 1  + nextNode with all other Nodes
+console.log(list.tail()); // node with value 52 + nextNode = null
+console.log(list.at(0)); // value:  1
+console.log(list.at(2)); // value:  5
+console.log(list.at(4)); // value: 54
+console.log(list.at(9)); // value: null
