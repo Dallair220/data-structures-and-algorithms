@@ -88,7 +88,12 @@ function LinkedList(headNode = null) {
     return false;
   }
 
-  return { append, prepend, size, head, tail, at, pop, contains };
+  // find(value) returns the index of the node containing value, or null if not found.
+  function find(value) {
+    // todo!
+  }
+
+  return { append, prepend, size, head, tail, at, pop, contains, find };
 }
 
 // Node factory, containing a value property and a link to the nextNode.
@@ -125,6 +130,5 @@ console.log(list.head()); // head:1 -> node:2 -> tail:5 -> null
 // console.log(list.head()); -> pop() works with all listSizes!
 
 console.log(list.contains(5)); // true
-
 const list2 = LinkedList();
-console.log(list2.contains(1));
+console.log(list2.contains(1)); // false
