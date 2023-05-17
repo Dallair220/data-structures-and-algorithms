@@ -102,7 +102,32 @@ function LinkedList(headNode = null) {
     return -1;
   }
 
-  return { append, prepend, size, head, tail, at, pop, contains, find };
+  // toString represents your LinkedList objects as strings, so you can print them out and preview them in the console.
+  // The format should be: ( value ) -> ( value ) -> ( value ) -> null
+  function toString() {
+    if (this.headNode === undefined) return null;
+
+    let string = '';
+    let tmpNode = this.headNode;
+    while (tmpNode != null) {
+      string += '( ' + tmpNode.value + ' ) -> ';
+      tmpNode = tmpNode.nextNode;
+    }
+    return string + ' null';
+  }
+
+  return {
+    append,
+    prepend,
+    size,
+    head,
+    tail,
+    at,
+    pop,
+    contains,
+    find,
+    toString,
+  };
 }
 
 // Node factory, containing a value property and a link to the nextNode.
@@ -146,3 +171,11 @@ console.log(list.head());
 console.log(list.find(1)); // 0
 console.log(list.find(2)); // 1
 console.log(list.find(5)); // 2
+
+console.log(list.toString()); // ( 1 ) -> ( 2 ) -> ( 5 ) ->  null
+console.log(list2.toString()); // null
+//list2.append(5);
+//list2.append(3);
+//list2.append(2);
+list2.append(2);
+console.log(list2.toString()); // ( 5 ) -> ( 3 ) -> ( 2 ) -> ( 2 ) ->  null
