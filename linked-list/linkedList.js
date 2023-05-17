@@ -174,8 +174,8 @@ console.log(list.find(5)); // 2
 
 console.log(list.toString()); // ( 1 ) -> ( 2 ) -> ( 5 ) ->  null
 console.log(list2.toString()); // null
-//list2.append(5);
-//list2.append(3);
-//list2.append(2);
+list2.append(5);
+list2.append(3);
+list2.append(2);
 list2.append(2);
 console.log(list2.toString()); // ( 5 ) -> ( 3 ) -> ( 2 ) -> ( 2 ) ->  null
