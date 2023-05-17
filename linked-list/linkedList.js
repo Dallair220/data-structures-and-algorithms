@@ -89,8 +89,17 @@ function LinkedList(headNode = null) {
   }
 
   // find(value) returns the index of the node containing value, or null if not found.
-  function find(value) {
-    // todo!
+  function find(valueToFind) {
+    let index = -1;
+    // Same here. Why is headNode undefined and not null?
+
+    let tmpNode = this.headNode;
+    while (tmpNode !== null) {
+      index += 1;
+      if (tmpNode.value === valueToFind) return index;
+      tmpNode = tmpNode.nextNode;
+    }
+    return -1;
   }
 
   return { append, prepend, size, head, tail, at, pop, contains, find };
@@ -132,3 +141,8 @@ console.log(list.head()); // head:1 -> node:2 -> tail:5 -> null
 console.log(list.contains(5)); // true
 const list2 = LinkedList();
 console.log(list2.contains(1)); // false
+
+console.log(list.head());
+console.log(list.find(1)); // 0
+console.log(list.find(2)); // 1
+console.log(list.find(5)); // 2
