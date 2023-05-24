@@ -1,4 +1,4 @@
-import mergeSort from '../../merge-sort/mergeSort.js';
+import mergeSort from 'mergesort-dllr';
 
 export function Tree(array, root) {}
 
