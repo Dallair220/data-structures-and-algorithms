@@ -1,9 +1,22 @@
-import mergeSort from 'mergesort-dllr';
+import removeDuplicatesAndSortArray from './cleanData.js';
 
-export function Tree(array, root) {}
+export default function Tree(array, root) {
+  const buildTree = ((arr) => {
+    console.log(removeDuplicatesAndSortArray(arr));
+  })(array);
 
-export function buildTree(array) {
-  let uniqueArray = [...new Set(array)]; // remove duplicates
-  let sortedArray = mergeSort(uniqueArray);
-  return sortedArray;
+  const prettyPrint = (node, prefix = '', isLeft = true) => {
+    if (node === null) {
+      return;
+    }
+    if (node.right !== null) {
+      prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
+    }
+    console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
+    if (node.left !== null) {
+      prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
+    }
+  };
+
+  return { root, prettyPrint };
 }
