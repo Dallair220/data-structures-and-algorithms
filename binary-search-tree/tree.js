@@ -31,5 +31,31 @@ export default function Tree(array) {
     }
   };
 
-  return { root, prettyPrint };
+  const insertValue = (value, node = root) => {
+    if (node === null) return (root = Node(value));
+    // if (node.data === null || node.data === undefined) node.data = value; -- not needed?
+    if (value === node.data) return;
+    // insert right
+    if (value > node.data) {
+      if (node.right !== null) {
+        insertValue(value, node.right);
+      } else {
+        node.right = Node(value);
+      }
+    }
+    // insert left
+    if (value < node.data) {
+      if (node.left !== null) {
+        insertValue(value, node.left);
+      } else {
+        node.left = Node(value);
+      }
+    }
+  };
+
+  const deleteValue = (value) => {
+    console.log('Deleting: ' + value);
+  };
+
+  return { root, prettyPrint, insertValue, deleteValue };
 }
