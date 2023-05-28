@@ -32,8 +32,9 @@ export default function Tree(array) {
   };
 
   const insertValue = (value, node = root) => {
+    // create Node when leaf is found
     if (node === null) return (root = Node(value));
-    // if (node.data === null || node.data === undefined) node.data = value; -- not needed?
+    // return if value is already inserted
     if (value === node.data) return;
     // insert right
     if (value > node.data) {
@@ -53,8 +54,8 @@ export default function Tree(array) {
     }
   };
 
-  const deleteValue = (value) => {
-    console.log('Deleting: ' + value);
+  const deleteValue = (value, node = root) => {
+    console.log('not working.');
   };
 
   return { root, prettyPrint, insertValue, deleteValue };
